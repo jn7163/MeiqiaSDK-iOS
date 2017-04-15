@@ -67,7 +67,9 @@ static CGFloat const kMQChatViewInputBarHeight = 80.0;
 }
 
 - (void)dealloc {
-    NSLog(@"清除chatViewController");
+    if (self.lifecycleDelegate) {
+        [self.lifecycleDelegate chatViewControllerDidDealloc:self];
+    }
     [self removeDelegateAndObserver];
     [chatViewConfig setConfigToDefault];
     [self.chatViewService setCurrentInputtingText:[(MQTabInputContentView *)self.chatInputBar.contentView textField].text];

@@ -13,6 +13,14 @@
 #import "MQServiceToViewInterface.h"
 #endif
 
+@class MQChatViewController;
+
+@protocol MQChatViewControllerLifecycleDelegate <NSObject>
+
+- (void)chatViewControllerDidDealloc:(MQChatViewController *)viewController;
+
+@end
+
 /**
  * @brief 聊天界面的ViewController
  *
@@ -37,7 +45,7 @@
 
 /**
  * 根据配置初始化客服聊天界面
- * @param manager 初始化配置
+ * @param chatViewConfig 初始化配置
  */
 - (instancetype)initWithChatViewManager:(MQChatViewConfig *)chatViewConfig;
 
@@ -54,5 +62,7 @@
  */
 @property (nonatomic, weak) id<MQServiceToViewInterfaceDelegate> serviceToViewDelegate;
 #endif
+
+@property (nonatomic, weak) id<MQChatViewControllerLifecycleDelegate> lifecycleDelegate;
 
 @end
